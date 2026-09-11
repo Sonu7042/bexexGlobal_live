@@ -1,0 +1,526 @@
+
+
+:root {
+  /* --bg: #f2f2f4; */
+  --text-main: #111111;
+  --accent-blue: #2f6efb;
+}
+
+/* full-width hero */
+.ht-section {
+  width: 100%;
+  min-height: 30vh;
+  padding-top: 5rem;
+}
+
+/* layout: label left, content right */
+.ht-inner {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+
+.ht-content {
+display: flex;
+flex-direction:column ;
+gap:1.4rem;
+
+}
+
+/* main heading */
+.ht-title {
+  line-height: 1.2;
+  font-weight: 800;
+  text-align: center;
+  font-size: 2.875rem;
+}
+
+.ht-title span {
+  color: var(--accent-blue);
+}
+
+/* sub text */
+.ht-sub {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #434343;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .ht-inner {
+    /* padding: 24px 16px 40px; */
+    flex-direction: column;      /* stack on mobile */
+    gap: 16px;
+  }
+
+  .ht-content {
+    margin-left: 0;
+  }
+
+  .ht-title {
+    font-size: clamp(24px, 7vw, 34px);
+    text-align: left;
+  }
+
+  .ht-sub {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Section wrapper */
+.tmulti-section {
+  display: flex;
+  padding-top: 4rem;
+  overflow: hidden;
+}
+
+.tmulti-inner {
+  width: 100%;
+  /* max-width: 1400px; */
+}
+
+/* Heading */
+.tmulti-heading {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #111827;
+  margin: 0 0 40px;
+}
+
+/* Cards */
+.tmulti-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.tmulti-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 26px 26px 26px 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+/* .tmulti-card:hover{
+  scale: 1.02;
+} */
+.tmulti-card-line {
+  width: 2px;
+  height: 70%;
+  background: #111827;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.tmulti-card-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.tmulti-card-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #2563eb;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tmulti-card-arrow-icon {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* Bottom section */
+.tmulti-bottom {
+  display: grid;
+  grid-template-columns: 0.8fr 2.6fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+.tmulti-bottom-left {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tmulti-bottom-label {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111827;
+}
+
+.tmulti-bottom-label + .tmulti-bottom-label {
+  margin-top: 4px;
+}
+
+.tmulti-accent {
+  color: #2563eb;
+  
+}
+
+/* =========================
+   TEXT-ONLY HOVER EFFECT
+========================= */
+
+.tmulti-card-title {
+  transition: transform 0.25s ease;
+  transform-origin: left center;
+}
+
+.tmulti-card:hover .tmulti-card-title {
+  transform: scale(1.06);
+}
+
+
+/* Big card */
+.tmulti-bottom-card {
+  background: #ffffff;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+  height: 100%;
+}
+
+
+/* Slider area inside big card */
+.tmulti-bottom-card-slider {
+  flex: 1;
+  overflow: hidden;
+  padding: 32px 40px 36px 40px;
+  box-sizing: border-box;
+}
+
+/* Each slide (stacked) */
+.tmulti-bottom-slide {
+  inset: 0;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  padding: 20px;
+}
+
+.tmulti-bottom-slide--active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.tmulti-bottom-slide h3 {
+  margin: 0 0 16px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.tmulti-bottom-slide p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* Right pill and circle */
+.tmulti-bottom-card-pill {
+  width: 32%;
+  /* background: #c2d9ff; */
+  border-radius: 0 999px 999px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  opacity: 0.4;
+}
+
+
+
+
+/* Slider dots */
+.tmulti-bottom-dots {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.tmulti-bottom-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  background: #cbd5f5;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tmulti-bottom-dot--active {
+  width: 18px;
+  background: #2563eb;
+}
+
+/* ---------- Responsive ---------- */
+
+/* Large tablets */
+@media (max-width: 1200px) {
+  .tmulti-grid {
+    gap: 24px 24px;
+  }
+
+  .tmulti-bottom-card-slider {
+    padding: 28px 30px 32px 30px;
+  }
+
+  .tmulti-bottom-card-pill {
+    width: 35%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .tmulti-heading {
+    font-size: 2.1rem;
+  }
+
+  .tmulti-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tmulti-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .tmulti-bottom-left {
+    max-width: 420px;
+  }
+
+  .tmulti-bottom-card {
+    min-height: 220px;
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  .tmulti-section {
+    /* padding: 48px 16px 64px; */
+  }
+
+  .tmulti-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tmulti-card {
+    padding: 20px 20px 20px 18px;
+  }
+
+  .tmulti-bottom-left {
+    padding: 24px 20px 22px;
+  }
+
+  .tmulti-bottom-label {
+    font-size: 1.7rem;
+  }
+
+  .tmulti-bottom-card {
+    flex-direction: column;
+  }
+
+  .tmulti-bottom-card-slider {
+    padding: 24px 20px 20px;
+  }
+
+  .tmulti-bottom-slide h3 {
+    font-size: 1.6rem;
+  }
+
+  .tmulti-bottom-card-pill {
+    width: 100%;
+    height: 130px;
+    border-radius: 0 0 999px 999px;
+  }
+
+  .tmulti-bottom-card-circle {
+    width: 120px;
+    height: 120px;
+    padding-bottom: 0;
+  }
+
+
+  .tmulti-bottom-dots {
+    justify-content: center;
+  }
+}
+
+
+
+
+/* Small phones */
+@media (max-width: 480px) {
+  .tmulti-heading {
+    font-size: 1.8rem;
+    margin-bottom: 28px;
+  }
+
+  .tmulti-card {
+    border-radius: 12px;
+    padding: 18px 16px 18px 16px;
+  }
+
+  .tmulti-bottom-label {
+    font-size: 1.6rem;
+  }
+
+  .tmulti-bottom-slide h3 {
+    font-size: 1.5rem;
+  }
+
+  .tmulti-bottom-slide p {
+    font-size: 0.95rem;
+  }
+
+  
+}
+
+
+@media  (max-width:426px){
+      .tmulti-bottom-card-circle {
+        width: 70%;
+        /* padding-bottom: 70%; */
+        /* background: #ffffff; */
+        /* border-radius: 50%; */
+        scale: 3;
+        right: -193px;
+        top: -223px;
+    }
+}
+
+
+@media(max-width:376px){
+      .tmulti-bottom-card-circle {
+               width: 70%;
+        /* padding-bottom: 70%; */
+        /* background: #ffffff; */
+        /* border-radius: 50%; */
+               scale: 3;
+        right: -184px;
+        top: -179px;
+    }
+}
+
+@media(max-width:325px){
+      .tmulti-bottom-card-circle {
+               width: 70%;
+        /* padding-bottom: 70%; */
+        /* background: #ffffff; */
+        /* border-radius: 50%; */
+               scale: 4;
+        right: -149px;
+        top: -143px;
+    }
+}
+
+
+
+
+
+
+
+.tmulti-bottom-right {
+  border-radius: 14px;
+  width: 100%;
+  display: grid; /* Your grid setup preserved */
+}
+
+.tmulti-carousel-container {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.tmulti-carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;  
+  border-radius: 14px;
+  /* Grid works with flex track */
+}
+
+.tmulti-carousel-card {
+  min-width: 100%;
+  padding: 26px;
+  box-sizing: border-box;
+  height: 100%;
+   background-color: #ffff;
+   
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tmulti-carousel-card h3 {
+  color: black;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.tmulti-carousel-card p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ONLY Mobile <426px - Single card in grid */
+@media (max-width: 425px) {
+  .tmulti-carousel-track {
+    gap: 2%;
+  }
+  
+  .tmulti-carousel-card {
+    min-width: 98%; /* Perfect single card fit */
+  }
+  
+  .tmulti-carousel-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .tmulti-carousel-card p {
+    font-size: 0.9rem;
+  }
+}
+
+

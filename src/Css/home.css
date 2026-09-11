@@ -1,0 +1,132 @@
+/* =============== BASE LAYOUT =============== */
+
+.home-container {
+  padding: 70px 0 0;
+  width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  height: 100%;
+}
+
+/* Title */
+.hero-title {
+  font-weight: 900;
+  color: #000;
+  line-height: 110%;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  max-width: 900px;
+  margin-top: 30px;
+}
+
+.hero-subtext {
+  margin-top: 1.5rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  font-weight: 600;
+  color: #000;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+/* Layout container */
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* TEXT + CARD */
+.headingWithBox {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* LEFT SIDE */
+.gap-between {
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+}
+
+/* RIGHT SIDE (Carousel) */
+.hero-card {
+  flex: 1.4;
+  min-width: 420px;
+  max-width: 500px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* border: 2px solid #A2A2A2; */
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.square-card {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 18px;
+  
+}
+
+.square-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Use contain if you don't want any cropping */
+  display: block;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.square-card:hover img {
+  transform: scale(1.03);
+}
+
+/* ============== TABLET ============== */
+@media (max-width: 768px) {
+  .headingWithBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+}
+
+/* ============== MOBILE ============== */
+@media (max-width: 426px) {
+  .hero-title {
+    font-size: 8vw;
+  }
+
+  .hero-subtext {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============== SMALL DEVICES ============== */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 9vw;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero-title {
+    font-size: 10vw;
+  }
+
+  .hero-subtext {
+    font-size: 0.85rem;
+  }
+}

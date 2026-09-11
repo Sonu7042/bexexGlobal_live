@@ -1,0 +1,247 @@
+.blog-grid-section {
+  /* background: #f4f4f4; */
+  padding: 4.5rem 0;
+  display: flex;
+  justify-content: center;
+
+}
+
+.blog-grid-container {
+  display: flex;
+  gap: 2.7rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1423px;
+  /* margin: 0 auto; */
+}
+
+.blog-grid-card {
+  /* background: #f4f4f4; */
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #bbb2;
+    max-width: 370px;
+    min-width: 445px;
+    flex: 1 1 300px;
+    /* padding: 18px; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 530px;
+}
+
+.blog-grid-img-wrap {
+  width: 100%;
+}
+
+.blog-grid-img {
+  width: 100%;
+  height: 278px;
+  object-fit: cover;
+  border-radius: 14px 14px 0 0;
+}
+
+.blog-grid-meta {
+  margin-top: 0.7rem;
+  font-size: 1rem;
+  color: #646464;
+  font-weight: 500;
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 0.6rem;
+}
+
+.blog-grid-title {
+  margin: 0.57rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.blog-grid-summary {
+  color: #949494;
+  margin: 0.45rem 0;
+  font-size: 1.03rem;
+  min-height: 70px;
+}
+
+.blog-grid-tags {
+  display: flex;
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+
+.blog-grid-tag {
+  border: 1px solid #ccc;
+  background: #ececec;
+  border-radius: 15px;
+  font-size: 0.96rem;
+  padding: 4.5px 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .blog-grid-container {
+    gap: 1.2rem;
+  }
+  .blog-grid-card {
+    max-width: 95vw;
+    min-width: 220px;
+  }
+  .blog-grid-img {
+    height: 170px;
+  }
+}
+
+@media (max-width: 680px) {
+  .blog-grid-container {
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+  }
+  .blog-grid-card {
+    max-width: 430px;
+    min-width: 210px;
+  }
+  .readMoreSection{
+    margin-top: 0!important;
+  }
+}
+
+
+.readMoreSection{
+  margin-top: 5rem;
+}
+
+
+.readMoreBlogHeading{
+  font-size: 2.875rem;
+  font-weight: 800;
+  line-height: 110%;
+  max-width: 800px;
+  margin-top: 2rem;
+}
+
+
+
+
+/* ================= SAFE OVERRIDES (DO NOT REMOVE OLD CSS) ================= */
+
+/* Force vertical stacking so button stays at bottom */
+.blog-grid-section {
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ensure grid layout wins (over earlier flex rules) */
+.blog-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Bottom-centered See More button */
+/* .see-more-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+} */
+
+/* Responsive grid safety */
+@media (max-width: 991px) {
+  .blog-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .blog-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.see-more-wrapper {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 40px; */
+}
+
+.see-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #323232;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.see-more-text {
+  line-height: 1;
+}
+
+/* Arrow Box */
+.arrow-box {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #0a6cff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Arrows */
+.arrow2 {
+  position: absolute;
+  font-size: 1rem;
+  color: #000000;
+  transition: transform 0.4s ease;
+}
+
+.arrow-default {
+  transform: translateY(0);
+  background-color: none!important;
+}
+
+.arrow-hover {
+  transform: translateY(-100%);
+  opacity: 0;
+  /* transition-delay: 0.15s; */
+}
+
+/* Black overlay */
+.arrow-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transform: translateY(-100%) scale(0);
+  transition: 0.35s ease;
+  z-index: -1;
+}
+
+/* Hover Effects */
+.see-more-btn:hover .arrow-overlay {
+  transform: translateY(0) scale(1);
+}
+
+.see-more-btn:hover .arrow-default {
+  transform: translateY(100%);
+  opacity: 0;
+  color: white;
+}
+
+.see-more-btn:hover .arrow-hover {
+  transform: translateY(0);
+  opacity: 1;
+  color: white;
+}

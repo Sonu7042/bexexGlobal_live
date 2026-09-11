@@ -1,0 +1,81 @@
+/* ---------- DARK THEME ---------- */
+.table-container.dark {
+  /* --bg: #ffffff; */
+  --text: #ffffff;
+  --border: #555;
+  --head-bg: hsl(0, 0%, 20%);
+  --row-hover: #f1f1f1;
+}
+
+/* ---------- LIGHT THEME ---------- */
+.table-container.light {
+  --bg: #ffffff;
+  --text: #323232;
+  --border: #ccc;
+  --head-bg: #323232;
+  --row-hover: #eeeeee;
+}
+
+/* ---------- BASE ---------- */
+.table-container {
+  background: var(--bg);
+  color: var(--text);
+  /* padding: 20px; */
+  
+}
+
+.table-heading {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* ---------- EXCEL STYLE TABLE ---------- */
+.table {
+  width: 100%;
+  border-collapse: collapse;           /* IMPORTANT */
+  border: 1px solid var(--border);     /* OUTER BORDER */
+  /* background-color: #ffffff; */
+}
+
+/* Column & Row borders */
+.table th{
+  color: #f1f1f1;
+  padding: 12px 16px;
+  border: 1px solid var(--border);     /* CELL GRID */
+  text-align: center;
+}
+.table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border);     /* CELL GRID */
+  text-align: left;
+  color: #323232;
+}
+/* .table tr{
+  background-color: #ffffff;
+} */
+/* Header */
+.table th {
+  background: var(--head-bg);
+}
+
+/* Row hover */
+.table tbody tr:hover {
+  background: var(--row-hover);
+  color: #323232;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  /* Keep excel layout even on mobile */
+  .table {
+    min-width: 600px;
+  }
+}

@@ -1,0 +1,1105 @@
+// InnerServicePage.jsx
+import "../Css/innerServicePage.css";
+import "../pages/auth.css";
+import React, { useState, useEffect } from "react";
+import { Play, X } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import LetsConnect from "./LetsConnect";
+import { FiDownload } from "react-icons/fi";
+import { HeadingComponent } from "./Buttons";
+// import booksIcon from "../assets/images/service_image/innerServices_booksIcons/books-svgrepo-com.svg";
+// import certificateicn from "../assets/images/service_image/innerServices_booksIcons/certificate-contract-svgrepo-com.svg";
+// import freeLearningicon from "../assets/images/service_image/innerServices_booksIcons/free-learning.png";
+import { signup, verifyEmail, login } from "../api/authApi";
+import { FcGoogle } from "react-icons/fc";
+import { SiFacebook } from "react-icons/si";
+import { GoogleLogin } from "@react-oauth/google";
+import FacebookLogin from "@greatsumini/react-facebook-login";
+import { LearnMoreButton } from "./Buttons";
+import servicesCardData from "../dataStore/serviceData.js";
+
+// const url= "http://localhost:5000"
+
+const url = "https://bexex-global-gzf7.vercel.app/api/auth";
+
+const getYouTubeId = (mediaUrl = "") => {
+  const match = mediaUrl.match(
+    /(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([^?&/]+)/,
+  );
+  return match?.[1] || "";
+};
+
+const getVideoModalUrl = (mediaUrl = "") => {
+  if (!getYouTubeId(mediaUrl)) return mediaUrl;
+  return `${mediaUrl}${mediaUrl.includes("?") ? "&" : "?"}autoplay=1`;
+};
+
+export default function InnerServicePage() {
+  const location = useLocation();
+  const { state } = location;
+  const serviceName = new URLSearchParams(location.search).get("service");
+  const card =
+    state?.card ||
+    servicesCardData.find(
+      (item) =>
+        item.value.trim().toLowerCase() === serviceName?.trim().toLowerCase(),
+    );
+  const navigate = useNavigate();
+
+  const [selectedMedia, setSelectedMedia] = useState(card?.media?.[0]);
+  const [showMediaModal, setShowMediaModal] = useState(false);
+
+  const openMediaModal = () => {
+    if (window.innerWidth <= 768) return;
+    setShowMediaModal(true);
+  };
+
+  // Auth modal states
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState("signup"); // 'signup' or 'login'
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+
+  // Signup form state
+  const [signupForm, setSignupForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [signupLoading, setSignupLoading] = useState(false);
+  const [agree, setAgree] = useState(false);
+  const [termsError, setTermsError] = useState("");
+  const [signupError, setSignupError] = useState("");
+
+  // Login form state
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
+  // OTP verify state
+  const [code, setCode] = useState("");
+  const [verifyLoading, setVerifyLoading] = useState(false);
+  const [verifyError, setVerifyError] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+
+  function pdfDownload() {
+    const link = document.createElement("a");
+    link.href = card.downloadPdf; // PDF URL
+    link.download = "document.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // when user clicks download
+  const downloadPdfWithAuth = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setShowAuthModal(true);
+      setAuthMode("login"); // Show login by default
+      return;
+    }
+    pdfDownload();
+  };
+
+  // Signup form handlers
+  const handleSignupChange = (e) => {
+    setSignupForm({ ...signupForm, [e.target.name]: e.target.value });
+    setSignupError("");
+  };
+
+  const handleTermsChange = (e) => {
+    const checked = e.target.checked;
+    setAgree(checked);
+    setTermsError("");
+    setSignupError("");
+  };
+
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    if (signupLoading) return;
+
+    setSignupError("");
+    setTermsError("");
+
+    if (!agree) {
+      setTermsError("You must agree to the Terms & Conditions.");
+      return;
+    }
+
+    setSignupLoading(true);
+    try {
+      const res = await signup(signupForm);
+      if (res.data?.success === false) {
+        setSignupError(res.data?.message || "Signup failed");
+        return;
+      }
+
+      // store email for OTP verify and open verify modal
+      setSignupEmail(signupForm.email);
+      setShowAuthModal(false);
+      setShowVerifyModal(true);
+      setCode("");
+      setVerifyError("");
+    } catch (err) {
+      setSignupError(err.response?.data?.message || "Server error. Try again.");
+    } finally {
+      setSignupLoading(false);
+    }
+  };
+
+  // Login form handlers
+  const handleLoginChange = (e) => {
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
+    setLoginError("");
+  };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    if (loginLoading) return;
+
+    setLoginError("");
+    setLoginLoading(true);
+
+    try {
+      const res = await login(loginForm);
+
+      if (res.data?.success === false) {
+        setLoginError(res.data?.message || "Login failed");
+        return;
+      }
+
+      // Save token
+      localStorage.setItem("token", res.data.token);
+
+      // Close modal and download PDF
+      setShowAuthModal(false);
+
+      // if (card?.downloadPdf) {
+      //   window.open(card.downloadPdf, "_blank");
+      // }
+
+      pdfDownload();
+
+      // Refresh page state
+      navigate(`${location.pathname}${location.search}`, {
+        replace: true,
+        state: { card },
+      });
+    } catch (err) {
+      setLoginError(err.response?.data?.message || "Server error. Try again.");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  // Switch auth mode
+  const switchToLogin = () => {
+    setAuthMode("login");
+    setSignupError("");
+    setTermsError("");
+    setLoginError("");
+  };
+
+  const switchToSignup = () => {
+    setAuthMode("signup");
+    setSignupError("");
+    setTermsError("");
+    setLoginError("");
+  };
+
+  // verify OTP handlers
+  const handleCodeChange = (e) => {
+    setCode(e.target.value);
+    setVerifyError("");
+  };
+
+  const handleVerifySubmit = async (e) => {
+    e.preventDefault();
+    if (verifyLoading) return;
+
+    setVerifyError("");
+    setVerifyLoading(true);
+
+    try {
+      const res = await verifyEmail({ email: signupEmail, code });
+      if (res.data?.success === false) {
+        setVerifyError(res.data?.message || "Verification failed");
+        return;
+      }
+
+      // save token if API returns it
+      if (res.data?.token) {
+        localStorage.setItem("token", res.data.token);
+      }
+
+      // close verify modal
+      setShowVerifyModal(false);
+
+      pdfDownload();
+
+      // refresh same page
+      navigate(`${location.pathname}${location.search}`, {
+        replace: true,
+        state: { card },
+      });
+    } catch (err) {
+      setVerifyError(err.response?.data?.message || "Server error. Try again.");
+    } finally {
+      setVerifyLoading(false);
+    }
+  };
+
+  // const downloadPdfWithAuthWithProvider = () => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     sessionStorage.setItem("pdfAfterAuth", card.downloadPdf);
+  //   }
+  // };
+
+  // const openPdfInNewTab = () => {
+  //    // redirect to pdf
+  //    if (card?.downloadPdf) {
+  //       window.open(card.downloadPdf, "_blank");
+  //     }
+
+  // };
+
+  // GOOGLE LOGIN / SIGNUP HANDLER
+
+  const handleGoogleLogin = async (googleToken) => {
+    try {
+      const res = await fetch(`${url}/api/auth/google-auth`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: googleToken }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setLoginError("Google authentication failed");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+
+      setShowAuthModal(false);
+
+      pdfDownload();
+    } catch (err) {
+      console.error(err);
+      setLoginError("Google login failed. Try again.");
+    }
+  };
+
+  const handleFacebookLogin = async (response) => {
+    try {
+      const res = await fetch(`${url}/api/auth/facebook-auth`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          accessToken: response.accessToken,
+          userID: response.userID,
+        }),
+      });
+
+      const data = await res.json();
+      localStorage.setItem("token", data.token);
+      setShowAuthModal(false);
+
+      pdfDownload();
+    } catch (err) {
+      console.error(err);
+
+      setLoginError("Google login failed. Try again.");
+    }
+  };
+
+  useEffect(() => {
+    if (showAuthModal || showVerifyModal || showMediaModal) {
+      const scrollY = window.scrollY;
+
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+
+      window.scrollTo(0, scrollY);
+    }
+
+    return () => {
+      const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+
+      window.scrollTo(0, scrollY);
+    };
+  }, [showAuthModal, showVerifyModal, showMediaModal]);
+
+  useEffect(() => {
+    setSelectedMedia(card?.media?.[0]);
+    setShowMediaModal(false);
+  }, [card]);
+
+  useEffect(() => {
+    if (!showMediaModal) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setShowMediaModal(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [showMediaModal]);
+
+  if (!card) return <p>Data not found</p>;
+
+  return (
+    <>
+      {showAuthModal && (
+        <div className="auth-overlay" onClick={() => setShowAuthModal(false)}>
+          <div className="auth-page" onClick={(e) => e.stopPropagation()}>
+            <div className="auth-content">
+              <button
+                type="button"
+                className="auth-close-btn"
+                onClick={() => setShowAuthModal(false)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="auth-header applyfont">
+                <h1>
+                  {authMode === "signup" ? "Create an account" : "Welcome back"}
+                </h1>
+                <p>
+                  {authMode === "signup"
+                    ? "Already have an account? "
+                    : "Don't have an account? "}
+                  <button
+                    type="button"
+                    className="auth-switch-link"
+                    onClick={
+                      authMode === "signup" ? switchToLogin : switchToSignup
+                    }
+                  >
+                    {authMode === "signup" ? "Log in" : "Sign up"}
+                  </button>
+                </p>
+              </div>
+
+              {authMode === "signup" ? (
+                // SIGNUP FORM
+                <form className="loginForm" onSubmit={handleSignupSubmit}>
+                  <input
+                    name="name"
+                    required
+                    placeholder="Full Name"
+                    value={signupForm.name}
+                    onChange={handleSignupChange}
+                  />
+                  <input
+                    name="email"
+                    required
+                    placeholder="Email"
+                    value={signupForm.email}
+                    onChange={handleSignupChange}
+                  />
+                  <input
+                    name="password"
+                    required
+                    type="password"
+                    placeholder="Enter Your Password"
+                    value={signupForm.password}
+                    onChange={handleSignupChange}
+                  />
+
+                  <div className="terms-row">
+                    <label className="imputTick">
+                      <input
+                        type="checkbox"
+                        checked={agree}
+                        onChange={handleTermsChange}
+                      />
+                      I agree to the &nbsp;
+                      <span className="terms-link">Term & Conditions</span>
+                    </label>
+                  </div>
+
+                  <p className="error-text">{signupError || termsError}</p>
+
+                  <button
+                    className="loginForm-submit"
+                    type="submit"
+                    disabled={signupLoading || !agree}
+                  >
+                    {signupLoading ? "Signing up..." : "Create account"}
+                  </button>
+
+                  <div className="auth-divider">or register with</div>
+
+                  <div className="social-row">
+                    <button type="button" className="social-btn google-btn">
+                      <span className="social-icon">
+                        <FcGoogle />
+                      </span>
+                      Google
+                    </button>
+                    <button type="button" className="social-btn facebook-btn">
+                      <span className="social-icon">
+                        <SiFacebook />
+                      </span>
+                      Facebook
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                // LOGIN FORM
+                <form className="loginForm" onSubmit={handleLoginSubmit}>
+                  <input
+                    name="email"
+                    required
+                    placeholder="Email"
+                    value={loginForm.email}
+                    onChange={handleLoginChange}
+                  />
+                  <input
+                    name="password"
+                    required
+                    type="password"
+                    placeholder="Enter Your Password"
+                    value={loginForm.password}
+                    onChange={handleLoginChange}
+                  />
+
+                  <p className="error-text">{loginError}</p>
+
+                  <button
+                    className="loginForm-submit"
+                    type="submit"
+                    disabled={loginLoading}
+                  >
+                    {loginLoading ? "Logging in..." : "Log in"}
+                  </button>
+
+                  <div className="auth-divider">or continue with</div>
+
+                  <div className="social-row">
+                    <button type="button" className="social-btn google-btn">
+                      <span className="social-icon">
+                        <FcGoogle />
+                      </span>
+                      Google
+                    </button>
+                    <button type="button" className="social-btn facebook-btn">
+                      <span className="social-icon">
+                        <SiFacebook />
+                      </span>
+                      Facebook
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* VERIFY OTP MODAL */}
+      {showVerifyModal && (
+        <div className="auth-overlay" onClick={() => setShowVerifyModal(false)}>
+          <div className="auth-page" onClick={(e) => e.stopPropagation()}>
+            <div className="auth-content">
+              <button
+                type="button"
+                className="auth-close-btn"
+                onClick={() => setShowVerifyModal(false)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="auth-header">
+                <h1>Verify your email</h1>
+                <p>
+                  We have sent an OTP to <strong>{signupEmail}</strong>
+                </p>
+              </div>
+
+              <form className="loginForm" onSubmit={handleVerifySubmit}>
+                <input
+                  placeholder="Enter OTP"
+                  value={code}
+                  onChange={handleCodeChange}
+                />
+
+                <p className="error-text">{verifyError}</p>
+
+                <button
+                  className="loginForm-submit"
+                  type="submit"
+                  disabled={verifyLoading}
+                >
+                  {verifyLoading ? "Verifying..." : "Verify"}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showMediaModal && selectedMedia && (
+        <div
+          className="media-modal-overlay"
+          onClick={() => setShowMediaModal(false)}
+          role="presentation"
+        >
+          <div
+            className="media-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedMedia.title || "Media preview"}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="media-modal-close"
+              onClick={() => setShowMediaModal(false)}
+              aria-label="Close media preview"
+            >
+              <X size={26} />
+            </button>
+            <div
+              className={`media-modal-content ${
+                selectedMedia.type === "image"
+                  ? "media-modal-content-image"
+                  : "media-modal-content-video"
+              }`}
+            >
+              {selectedMedia.type === "image" ? (
+                <img
+                  src={selectedMedia.url}
+                  alt={selectedMedia.title || "Service preview"}
+                />
+              ) : getYouTubeId(selectedMedia.url) ? (
+                <iframe
+                  src={getVideoModalUrl(selectedMedia.url)}
+                  title={selectedMedia.title || "Service video"}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <video src={selectedMedia.url} controls autoPlay playsInline>
+                  Your browser does not support this video.
+                </video>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section className="px-4 md:px-16 lg:px-12 pt-[2.875rem]">
+        <div className="heading-portion">
+          <LearnMoreButton
+            text="All Services"
+            link="/services"
+            // marginTop="0"
+          />
+        </div>
+
+        <div className="fs-page">
+          {/* LEFT COLUMN */}
+          <div className="fs-left">
+            {/* GALLERY */}
+            <div className="gallery-container">
+              <div className="gallery-flex">
+                <div className="thumb-column">
+                  {card.media.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setSelectedMedia(item)}
+                      className={`thumb-btn ${
+                        selectedMedia?.id === item.id ? "thumb-active" : ""
+                      }`}
+                      aria-label={`Show ${item.title || item.type}`}
+                      aria-pressed={selectedMedia?.id === item.id}
+                    >
+                      {item.type === "image" ? (
+                        <img
+                          src={item.url}
+                          alt={item.title}
+                          className="thumb-img"
+                        />
+                      ) : (
+                        <div className="video-thumb">
+                          <img
+                            src={
+                              getYouTubeId(item.url)
+                                ? `https://img.youtube.com/vi/${getYouTubeId(
+                                    item.url,
+                                  )}/hqdefault.jpg`
+                                : card.img
+                            }
+                            alt="Video thumbnail"
+                          />
+                          <span className="video-play-icon">
+                            <Play size={28} />
+                          </span>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="media-wrapper">
+                  <button
+                    type="button"
+                    className="media-card"
+                    onClick={openMediaModal}
+                    aria-label={`Open ${
+                      selectedMedia?.title || "media"
+                    } in full-screen viewer`}
+                  >
+                    {selectedMedia?.type === "image" ? (
+                      <img
+                        src={selectedMedia.url}
+                        alt={selectedMedia.title}
+                        className="media-img"
+                      />
+                    ) : (
+                      <div className="video-preview">
+                        <img
+                          src={
+                            getYouTubeId(selectedMedia.url)
+                              ? `https://img.youtube.com/vi/${getYouTubeId(
+                                  selectedMedia.url,
+                                )}/maxresdefault.jpg`
+                              : card.img
+                          }
+                          alt={selectedMedia.title || "Service video"}
+                        />
+                        <span className="media-preview-play">
+                          <Play size={42} fill="currentColor" />
+                        </span>
+                      </div>
+                    )}
+                    <span className="media-open-hint">Click to expand</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="fs-iso-card">
+  <div className="fs-iso-text">
+    <h3 className="fs-iso-title">{card.downlaodheadingText}</h3>
+
+    <div
+      className="fs-download-btn"
+      onClick={downloadPdfWithAuth}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          downloadPdfWithAuth();
+        }
+      }}
+    >
+      <FiDownload size={18} />
+      <span>Download PDF</span>
+    </div>
+  </div>
+</div>
+
+            {/* OLD DOWNLOAD CARD */}
+            {/* <div className="fs-iso-card">
+              <div className="fs-iso-text">
+                <h3 className="fs-iso-title">{card.downlaodheadingText}</h3>
+                <p className="fs-iso-desc">{card.downlaodheadingSubText}</p>
+
+                <div
+                  className="download-button"
+                  onClick={downloadPdfWithAuth}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === "Enter" && downloadPdfWithAuth()}
+                >
+                  <div className="download-btn-hover">Download</div>
+                  <div className="circle-hover">
+                    <FiDownload />
+                  </div>
+                </div>
+              </div>
+
+              <div className="fs-iso-flyer-wrapper">
+                <img
+                  src={card.downlaodheadingImg}
+                  alt="Download preview"
+                  className="fs-iso-flyer"
+                />
+              </div>
+            </div> */}
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="fs-right">
+            <header className="fs-header">
+              <h1 className="fs-why-title applyfont">
+                {card?.headingParts?.map((part, index) => (
+                  <span key={index} className={part.highlight ? "itly" : ""}>
+                    {part.text}
+                  </span>
+                ))}
+              </h1>
+
+              <div className="fs-why-text">
+                <h2 className="fs-secondary-heading">
+                  {card?.secondaryHeading}
+                </h2>
+                {card?.paragrapgh?.map((text, index) => (
+                  <p key={index}>{text}</p>
+                ))}
+              </div>
+            </header>
+
+            <div className="fs-services-grid">
+            <section className="fs-cover-section">
+              <h2 className="fs-cover-title">{card?.secondSubHeading}</h2>
+              <ul className="fs-cover-list">
+                {card?.secondListItems?.map((item, index) =>
+                  typeof item === "string" ? (
+                    <li key={index}>{item}</li>
+                  ) : (
+                    <li key={index}>
+                      {item.title}
+                      {item.subItems && (
+                        <ul className="fs-cover-list">
+                          {item?.subItems?.map((subItem, subIndex) => (
+                            <li key={subIndex}>{subItem}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ),
+                )}
+              </ul>
+            </section>
+
+            <section className="fs-cover-section">
+              <h2 className="fs-cover-title">{card?.subHeading}</h2>
+              <ul className="fs-cover-list-ticked">
+                {card?.listItems?.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            {card?.thirdSubHeading && (
+              <section className="fs-cover-section">
+                <h2 className="fs-cover-title">{card.thirdSubHeading}</h2>
+
+                <ul className="fs-cover-list-ticked">
+                  {card?.thirdListItems?.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {card?.fourthSubHeading && (
+              <section className="fs-cover-section">
+                <h2 className="fs-cover-title">{card.fourthSubHeading}</h2>
+
+                <ul className="fs-cover-list-ticked">
+                  {card?.fourthListItems?.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            </div>
+
+            {/* {card?.thirdSubHeading && (
+                <section className="fs-cover-section">
+                  <h2 className="fs-cover-title">
+                    {card?.thirdSubHeading}
+                  </h2>
+
+                  <ul className="fs-cover-list-ticked">
+                    {card?.thirdListItems?.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+              )} */}
+
+            {/* <div className="fs-badges">
+              {card?.whatWeProvide?.map((item, index) => (
+                <div className="fs-badge" key={index}>
+                  <span className="fs-badge-icon">
+                    <img width={item?.width} src={item?.img} alt="icon" />
+                  </span>
+                  <span>{item?.text}</span>
+                </div>
+              ))}
+            </div> */}
+          </div>
+        </div>
+
+        {/* SINGLE AUTH MODAL - SWITCHES BETWEEN LOGIN/SIGNUP */}
+        {showAuthModal && (
+          <div className="auth-overlay" onClick={() => setShowAuthModal(false)}>
+            <div className="auth-page" onClick={(e) => e.stopPropagation()}>
+              <div className="auth-content">
+                <button
+                  type="button"
+                  className="auth-close-btn"
+                  onClick={() => setShowAuthModal(false)}
+                  aria-label="Close"
+                >
+                  <X size={18} />
+                </button>
+
+                <div className="auth-header">
+                  <h1>
+                    {authMode === "signup"
+                      ? "Create an account"
+                      : "Welcome back"}
+                  </h1>
+                  <p>
+                    {authMode === "signup"
+                      ? "Already have an account? "
+                      : "Don't have an account? "}
+                    <button
+                      type="button"
+                      className="auth-switch-link"
+                      onClick={
+                        authMode === "signup" ? switchToLogin : switchToSignup
+                      }
+                    >
+                      {authMode === "signup" ? "Log in" : "Sign up"}
+                    </button>
+                  </p>
+                </div>
+
+                {authMode === "signup" ? (
+                  // SIGNUP FORM
+                  <form className="loginForm" onSubmit={handleSignupSubmit}>
+                    <input
+                      name="name"
+                      required
+                      placeholder="Full Name"
+                      value={signupForm.name}
+                      onChange={handleSignupChange}
+                    />
+                    <input
+                      name="email"
+                      required
+                      placeholder="Email"
+                      value={signupForm.email}
+                      onChange={handleSignupChange}
+                    />
+                    <input
+                      name="password"
+                      required
+                      type="password"
+                      placeholder="Enter Your Password"
+                      value={signupForm.password}
+                      onChange={handleSignupChange}
+                    />
+
+                    <div className="terms-row">
+                      <label className="imputTick">
+                        <input
+                          type="checkbox"
+                          checked={agree}
+                          onChange={handleTermsChange}
+                        />
+                        I agree to the &nbsp;
+                        <span className="terms-link">Term & Conditions</span>
+                      </label>
+                    </div>
+
+                    <p className="error-text">{signupError || termsError}</p>
+
+                    <button
+                      className="loginForm-submit"
+                      type="submit"
+                      disabled={signupLoading || !agree}
+                    >
+                      {signupLoading ? "Signing up..." : "Create account"}
+                    </button>
+
+                    <div className="auth-divider">or register with</div>
+
+                    <div className="social-row ">
+                      <div className="social-btn facebook-btn">
+                        <GoogleLogin
+                          onSuccess={(credentialResponse) => {
+                            handleGoogleLogin(credentialResponse.credential);
+                          }}
+                          onError={() => {
+                            console.log("Google Login Failed");
+                          }}
+                        />
+                      </div>
+
+                      <FacebookLogin
+                        appId="3213189502315910"
+                        onSuccess={(response) => {
+                          // console.log("FB Response:", response);
+                          handleFacebookLogin(response);
+                        }}
+                        onFail={(error) => {
+                          console.log("FB Error:", error);
+                        }}
+                        render={({ onClick }) => (
+                          <button
+                            className="social-btn facebook-btn"
+                            onClick={onClick}
+                          >
+                            <span className="social-icon">
+                              <SiFacebook />
+                            </span>
+                            Continue with Facebook
+                          </button>
+                        )}
+                      />
+                    </div>
+                  </form>
+                ) : (
+                  // LOGIN FORM
+                  <form className="loginForm" onSubmit={handleLoginSubmit}>
+                    <input
+                      name="email"
+                      required
+                      placeholder="Email"
+                      value={loginForm.email}
+                      onChange={handleLoginChange}
+                    />
+                    <input
+                      name="password"
+                      required
+                      type="password"
+                      placeholder="Enter Your Password"
+                      value={loginForm.password}
+                      onChange={handleLoginChange}
+                    />
+
+                    <p className="error-text">{loginError}</p>
+
+                    <button
+                      className="loginForm-submit"
+                      type="submit"
+                      disabled={loginLoading}
+                    >
+                      {loginLoading ? "Logging in..." : "Log in"}
+                    </button>
+
+                    <div className="auth-divider">or continue with</div>
+
+                    <div className="social-row">
+                      <GoogleLogin
+                        onSuccess={(credentialResponse) => {
+                          handleGoogleLogin(credentialResponse.credential);
+                        }}
+                        onError={() => {
+                          console.log("Google Login Failed");
+                        }}
+                      />
+
+                      <FacebookLogin
+                        appId="3213189502315910"
+                        onSuccess={(response) => {
+                          // console.log("FB Response:", response);
+                          handleFacebookLogin(response);
+                        }}
+                        onFail={(error) => {
+                          console.log("FB Error:", error);
+                        }}
+                        render={({ onClick }) => (
+                          <button
+                            className="social-btn facebook-btn"
+                            onClick={onClick}
+                          >
+                            <span className="social-icon">
+                              <SiFacebook />
+                            </span>
+                            Continue with Facebook
+                          </button>
+                        )}
+                      />
+                    </div>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* VERIFY OTP MODAL */}
+        {showVerifyModal && (
+          <div
+            className="auth-overlay"
+            onClick={() => setShowVerifyModal(false)}
+          >
+            <div className="auth-page" onClick={(e) => e.stopPropagation()}>
+              <div className="auth-content">
+                <button
+                  type="button"
+                  className="auth-close-btn"
+                  onClick={() => setShowVerifyModal(false)}
+                  aria-label="Close"
+                >
+                  <X size={18} />
+                </button>
+
+                <div className="auth-header">
+                  <h1>Verify your email</h1>
+                  <p>
+                    We have sent an OTP to <strong>{signupEmail}</strong>
+                  </p>
+                </div>
+
+                <form className="loginForm" onSubmit={handleVerifySubmit}>
+                  <input
+                    placeholder="Enter OTP"
+                    value={code}
+                    onChange={handleCodeChange}
+                  />
+
+                  <p className="error-text">{verifyError}</p>
+
+                  <button
+                    className="loginForm-submit"
+                    type="submit"
+                    disabled={verifyLoading}
+                  >
+                    {verifyLoading ? "Verifying..." : "Verify"}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <LetsConnect />
+      <Footer />
+    </>
+  );
+}

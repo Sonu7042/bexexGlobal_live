@@ -1,0 +1,155 @@
+.timelineWrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #3c3c3c;
+  position: relative;
+}
+
+.leftPanel {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.fadedYear {
+  font-size: 70px;
+  opacity: 0.08;
+  margin: 20px 0;
+}
+
+.currentYear {
+  font-size: 120px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* RIGHT CONTENT */
+.rightContent {
+  width: 60%;
+  padding: 120px 40px;
+  position: relative;
+}
+
+.contentBlock {
+  height: 40vh; /* requested smaller height */
+  /* margin-bottom: 40px; */
+  display: flex;
+  /* align-items: center; */
+  /* border-bottom: 1px solid #ddd; */
+}
+
+
+.contentBlock p {
+  transition: all 0.2s ease-in-out;
+  transform-origin: center;
+  color: #d9d9d9;
+  font-size: 1.375rem;
+  align-self: flex-end;
+}
+
+.contentBlock0 p {
+padding-bottom: 50px;
+}
+
+
+
+
+
+
+
+@media (max-width: 900px) {
+  .mobileTimelineWrapper {
+    width: 100%;
+    text-align: center;
+    padding: 40px 20px;
+    background: #3c3c3c;
+  }
+
+  .mobileTimelineBlock {
+    transition: all 0.5s ease-in-out;
+  }
+
+  .mobileYear {
+    font-size: 36px;
+    font-weight: 900;
+    color: #2563eb;
+    margin-bottom: 16px;
+  }
+
+  .mobileContent {
+    font-size: 16px;
+    color: #d9d9d9;
+  }
+
+  .mobileDots {
+    margin-top: 16px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .dot.active {
+    background: #d12a2a;
+  }
+}
+
+
+
+
+
+
+
+
+/* heading section */
+
+.journey-header {
+  text-align: left;
+  padding-top: 5rem;
+  padding-left: 2rem;
+  background-color: #3c3c3c;
+}
+
+
+.journey-heading {
+  font-size: 2.875rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #d9d9d9;
+}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .journey-heading {
+    font-size: 1.875rem;
+    color: #d9d9d9;
+  }
+}
+
+
+
+.journey-heading-accent {
+  font-style: italic;
+}
+
+
+
+
+
+
+
+
+

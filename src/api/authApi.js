@@ -1,0 +1,12 @@
+import axios from 'axios'
+
+const API= axios.create({
+    baseURL:"https://bexex-global-gzf7.vercel.app/api/auth"
+    // baseURL:"http://localhost:5000/api/auth"
+})
+
+
+
+export const signup = (data)=> API.post('/signup', data);
+export const verifyEmail = (data)=> API.post('/verify-email', data);
+export const login = (data)=> API.post('/login', data);

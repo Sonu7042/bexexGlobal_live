@@ -1,0 +1,114 @@
+/* StatsSection.css */
+
+:root {
+  --card-bg: #ffffff;
+  --card-border-radius: 8px;
+  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --accent-bg: #e1e1e2;
+  --title-color: #363636;
+  --text-color: #555555;
+  --number-color: #000000;
+}
+
+.stats-section {
+  width: 100%;
+  padding-top: 5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.stats-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Each big white card */
+.stats-card {
+  flex: 1 1 280px;
+  min-width: 260px;
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem 2rem;
+  box-sizing: border-box;
+}
+
+/* Title like in design */
+.stats-card-title {
+  margin: 0 0 3rem;
+ 
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+/* Inner two grey boxes */
+.stats-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stats-item {
+  background-color: var(--accent-bg);
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* Number text */
+.stats-number {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--number-color);
+  margin-bottom: 0.3rem;
+}
+
+/* Label text */
+.stats-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .stats-section {
+    padding-top: 2.5rem;
+  }
+
+  .stats-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .stats-card-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stats-card-grid {
+    grid-template-columns: 1fr;
+    display: flex;
+  }
+
+  .stats-item{
+    width: 100%;
+  }
+
+
+
+
+
+}
+
+@media (min-width: 1200px) {
+  .stats-card-title {
+    font-size: 1.8rem;
+  }
+
+  .stats-number {
+    font-size: 1.8rem;
+  }
+}
