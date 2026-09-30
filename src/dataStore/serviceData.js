@@ -21,31 +21,26 @@ import BehaviorBasedSafetyImg from "../assets/EHS/BehaviorBasedSafety.webp"
 
 import AS9100AerospaceQMS from "../assets/managementSystem&Complaince/AS9100AerospaceQMS.webp";
 import IATF16949AutomotiveQMS from "../assets/managementSystem&Complaince/IATF16949AutomotiveQMS.webp";
-
-// import ISO9001QualityManagement from "../assets/managementSystem&Complaince/ISO9001QualityManagement.webp";
-// import ISO14001EnvironmentalManagement from "../assets/managementSystem&Complaince/ISO14001EnvironmentalManagement.webp";
-// import ISO14046WaterFootprint from "../assets/managementSystem&Complaince/ISO14046WaterFootprint.webp";
-// import ISO14064GHGAccounting from "../assets/managementSystem&Complaince/ISO14064GHGAccounting.webp";
-// import ISO14090ClimateChangeAdaptation from "../assets/managementSystem&Complaince/ISO14090ClimateChangeAdaptation.webp";
-
-// import ISO17025Laboratories from "../assets/managementSystem&Complaince/ISO17025Laboratories.webp";
-// import ISO20400SustainableProcurement from "../assets/managementSystem&Complaince/ISO20400SustainableProcurement.webp";
-// import ISO21001EducationalOrganizations from "../assets/managementSystem&Complaince/ISO21001EducationalOrganizations.webp";
-// import ISO22000FoodSafety from "../assets/managementSystem&Complaince/ISO22000FoodSafety.webp";
-// import ISO22301BusinessContinuity from "../assets/managementSystem&Complaince/ISO22301BusinessContinuity.webp";
-// import ISO26000SocialResponsibility from "../assets/managementSystem&Complaince/ISO26000SocialResponsibility.webp";
-// import ISO28000SupplyChainSecurity from "../assets/managementSystem&Complaince/ISO28000SupplyChainSecurity.webp";
-
-// import ISO31000RiskManagement from "../assets/managementSystem&Complaince/ISO31000RiskManagement.webp";
-// import ISO37001AntiBribery from "../assets/managementSystem&Complaince/ISO37001AntiBribery.webp";
-// import ISO39001RoadTrafficSafety from "../assets/managementSystem&Complaince/ISO39001RoadTrafficSafety.webp";
-
-// import ISO45001OccupationalHealthSafety from "../assets/managementSystem&Complaince/ISO45001OccupationalHealth&Safety.webp";
-// import ISO50001EnergyManagement from "../assets/managementSystem&Complaince/ISO50001EnergyManagement.webp";
-// import ISO55001AssetManagement from "../assets/managementSystem&Complaince/ISO55001AssetManagement.webp";
-
-// import ISOIEC20000ITServiceManagement from "../assets/managementSystem&Complaince/ISOIEC20000ITServiceManagement.webp";
-// import ISOIEC27001InformationSecurity from "../assets/managementSystem&Complaince/ISOIEC27001InformationSecurity.webp";
+import ISO9001QualityManagement from "../assets/managementSystem&Complaince/ISO9001QualityManagement.webp";
+import ISO14001EnvironmentalManagement from "../assets/managementSystem&Complaince/ISO14001EnvironmentalManagement.webp";
+import ISO14046WaterFootprint from "../assets/managementSystem&Complaince/ISO14046WaterFootprint.webp";
+import ISO14064GHGAccounting from "../assets/managementSystem&Complaince/ISO14064GHGAccounting.webp";
+import ISO14090ClimateChangeAdaptation from "../assets/managementSystem&Complaince/ISO14090ClimateChangeAdaptation.webp";
+import ISO17025Laboratories from "../assets/managementSystem&Complaince/ISO17025Laboratories.webp";
+import ISO20400SustainableProcurement from "../assets/managementSystem&Complaince/ISO20400SustainableProcurement.webp";
+import ISO21001EducationalOrganizations from "../assets/managementSystem&Complaince/ISO21001EducationalOrganizations.webp";
+import ISO22000FoodSafety from "../assets/managementSystem&Complaince/ISO22000FoodSafety.webp";
+import ISO22301BusinessContinuity from "../assets/managementSystem&Complaince/ISO22301BusinessContinuity.webp";
+import ISO26000SocialResponsibility from "../assets/managementSystem&Complaince/ISO26000SocialResponsibility.webp";
+import ISO28000SupplyChainSecurity from "../assets/managementSystem&Complaince/ISO28000SupplyChainSecurity.webp";
+import ISO31000RiskManagement from "../assets/managementSystem&Complaince/ISO31000RiskManagement.webp";
+import ISO37001AntiBribery from "../assets/managementSystem&Complaince/ISO37001AntiBribery.webp";
+import ISO39001RoadTrafficSafety from "../assets/managementSystem&Complaince/ISO39001Road rafficSafety.webp";
+import ISO45001OccupationalHealthSafety from "../assets/managementSystem&Complaince/ISO45001OccupationalHealth&Safety.webp";
+import ISO50001EnergyManagement from "../assets/managementSystem&Complaince/ISO50001EnergyManagement.webp";
+import ISO55001AssetManagement from "../assets/managementSystem&Complaince/ISO55001AssetManagement.webp";
+import ISOIEC20000ITServiceManagement from "../assets/managementSystem&Complaince/ISOIEC20000ITServiceManagement.webp";
+import ISOIEC27001InformationSecurity from "../assets/managementSystem&Complaince/ISOIEC27001InformationSecurity.webp";
 
 const servicesCardData = [
 
@@ -1074,6 +1069,12 @@ const servicesCardData = [
         url: msEnvironmetalManagement,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO14001EnvironmentalManagement,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1164,6 +1165,12 @@ const servicesCardData = [
         url: msOccupationHealthSafety,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO45001OccupationalHealthSafety,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1245,6 +1252,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msEnergyManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO50001EnergyManagement,
         title: "Modern Architecture",
       },
 
@@ -1329,6 +1342,12 @@ const servicesCardData = [
         url: msFoodSafety,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO22000FoodSafety,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1411,6 +1430,12 @@ const servicesCardData = [
         url: msBusinessContinuity,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO22301BusinessContinuity,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1491,6 +1516,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msAssetManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO55001AssetManagement,
         title: "Modern Architecture",
       },
 
@@ -1576,6 +1607,12 @@ const servicesCardData = [
         url: msLaboratories,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO17025Laboratories,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1656,6 +1693,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msItServiceManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISOIEC20000ITServiceManagement,
         title: "Modern Architecture",
       },
 
@@ -1740,6 +1783,12 @@ const servicesCardData = [
         url: msInformationSecurity,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISOIEC27001InformationSecurity,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1820,6 +1869,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msEducationOrganization,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO21001EducationalOrganizations,
         title: "Modern Architecture",
       },
 
@@ -1904,6 +1959,12 @@ const servicesCardData = [
         url: msRoadTraffic,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO39001RoadTrafficSafety,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -1986,6 +2047,12 @@ const servicesCardData = [
         url: msSuppluChain,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO28000SupplyChainSecurity,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2063,6 +2130,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msRiskManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO31000RiskManagement,
         title: "Modern Architecture",
       },
 
@@ -2144,6 +2217,12 @@ const servicesCardData = [
         url: msGHGAccounting,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO14064GHGAccounting,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2220,6 +2299,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msWaterFootprint,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO14046WaterFootprint,
         title: "Modern Architecture",
       },
 
@@ -2300,6 +2385,12 @@ const servicesCardData = [
         url: msClimateChage,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO14090ClimateChangeAdaptation,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2376,6 +2467,12 @@ const servicesCardData = [
         url: msSustainaleProcurement,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ISO20400SustainableProcurement,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2450,6 +2547,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msSocialResponsibility,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO26000SocialResponsibility,
         title: "Modern Architecture",
       },
 
@@ -2532,6 +2635,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msAntiBribery,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO37001AntiBribery,
         title: "Modern Architecture",
       },
 
@@ -2617,6 +2726,12 @@ const servicesCardData = [
         url: msAutomotive,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: IATF16949AutomotiveQMS,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2698,6 +2813,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msAerospace,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: AS9100AerospaceQMS,
         title: "Modern Architecture",
       },
 
