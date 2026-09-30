@@ -13,6 +13,40 @@ import ElectricalSafetyImg from "../assets/EHS/ElectricalSafety.webp"
 import ConstructionSafetyImg from "../assets/EHS/ConstructionSafety.webp"
 import BehaviorBasedSafetyImg from "../assets/EHS/BehaviorBasedSafety.webp"
 
+
+
+// Compliance services images
+// Compliance services images
+// Management Systems & Compliance images
+
+import AS9100AerospaceQMS from "../assets/managementSystem&Complaince/AS9100AerospaceQMS.webp";
+import IATF16949AutomotiveQMS from "../assets/managementSystem&Complaince/IATF16949AutomotiveQMS.webp";
+
+// import ISO9001QualityManagement from "../assets/managementSystem&Complaince/ISO9001QualityManagement.webp";
+// import ISO14001EnvironmentalManagement from "../assets/managementSystem&Complaince/ISO14001EnvironmentalManagement.webp";
+// import ISO14046WaterFootprint from "../assets/managementSystem&Complaince/ISO14046WaterFootprint.webp";
+// import ISO14064GHGAccounting from "../assets/managementSystem&Complaince/ISO14064GHGAccounting.webp";
+// import ISO14090ClimateChangeAdaptation from "../assets/managementSystem&Complaince/ISO14090ClimateChangeAdaptation.webp";
+
+// import ISO17025Laboratories from "../assets/managementSystem&Complaince/ISO17025Laboratories.webp";
+// import ISO20400SustainableProcurement from "../assets/managementSystem&Complaince/ISO20400SustainableProcurement.webp";
+// import ISO21001EducationalOrganizations from "../assets/managementSystem&Complaince/ISO21001EducationalOrganizations.webp";
+// import ISO22000FoodSafety from "../assets/managementSystem&Complaince/ISO22000FoodSafety.webp";
+// import ISO22301BusinessContinuity from "../assets/managementSystem&Complaince/ISO22301BusinessContinuity.webp";
+// import ISO26000SocialResponsibility from "../assets/managementSystem&Complaince/ISO26000SocialResponsibility.webp";
+// import ISO28000SupplyChainSecurity from "../assets/managementSystem&Complaince/ISO28000SupplyChainSecurity.webp";
+
+// import ISO31000RiskManagement from "../assets/managementSystem&Complaince/ISO31000RiskManagement.webp";
+// import ISO37001AntiBribery from "../assets/managementSystem&Complaince/ISO37001AntiBribery.webp";
+// import ISO39001RoadTrafficSafety from "../assets/managementSystem&Complaince/ISO39001RoadTrafficSafety.webp";
+
+// import ISO45001OccupationalHealthSafety from "../assets/managementSystem&Complaince/ISO45001OccupationalHealth&Safety.webp";
+// import ISO50001EnergyManagement from "../assets/managementSystem&Complaince/ISO50001EnergyManagement.webp";
+// import ISO55001AssetManagement from "../assets/managementSystem&Complaince/ISO55001AssetManagement.webp";
+
+// import ISOIEC20000ITServiceManagement from "../assets/managementSystem&Complaince/ISOIEC20000ITServiceManagement.webp";
+// import ISOIEC27001InformationSecurity from "../assets/managementSystem&Complaince/ISOIEC27001InformationSecurity.webp";
+
 const servicesCardData = [
 
   // Environment, Health & Safety Solutions Content START Here
@@ -897,7 +931,7 @@ const servicesCardData = [
     category: "ISO 9001:2015/AMD 1:2024",
     value: "ISO 9001 Quality Management",
     mainService: "Training",
-    img: msQualityManagement,
+    img: msQualityManagement, 
     headingParts: [
       { text: "What is ", highlight: false },
       { text: "ISO 9001 Quality Management", highlight: true },
@@ -949,6 +983,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: msQualityManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: ISO9001QualityManagement,
         title: "Modern Architecture",
       },
 
