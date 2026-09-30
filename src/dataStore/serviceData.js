@@ -13,6 +13,25 @@ import ElectricalSafetyImg from "../assets/EHS/ElectricalSafety.webp"
 import ConstructionSafetyImg from "../assets/EHS/ConstructionSafety.webp"
 import BehaviorBasedSafetyImg from "../assets/EHS/BehaviorBasedSafety.webp"
 
+import SixSigmaImg from "../assets/trainingESGSoftwareQuality/SixSigma.webp";
+import FiveSWorkplaceOrganizationImg from "../assets/trainingESGSoftwareQuality/5SWorkplaceOrganization.webp";
+import SupplierQualityManagementImg from "../assets/trainingESGSoftwareQuality/SupplierQualityManagement.webp";
+import LeanManagementImg from "../assets/trainingESGSoftwareQuality/LeanManagement.webp";
+import TotalProductiveMaintenanceImg from "../assets/trainingESGSoftwareQuality/TotalProductiveMaintenance(TPM).webp";
+import CoreQualityToolsImg from "../assets/trainingESGSoftwareQuality/CoreQualityTools.webp";
+import ESGStrategyReportingImg from "../assets/trainingESGSoftwareQuality/ESGStrategy&Reporting.webp";
+import ESGManagementSystemImg from "../assets/trainingESGSoftwareQuality/ESGManagementSystem(ESGMS).webp";
+import EnergyManagementImg from "../assets/trainingESGSoftwareQuality/EnergyManagement.webp";
+import EnvironmentalComplianceImg from "../assets/trainingESGSoftwareQuality/EnvironmentalCompliance.webp";
+import WaterWasteManagementImg from "../assets/trainingESGSoftwareQuality/Water&WasteManagement.webp";
+import SocialWelfareImg from "../assets/trainingESGSoftwareQuality/Social&Welfare.webp";
+import AllTrainingProgramsImg from "../assets/trainingESGSoftwareQuality/AllTrainingPrograms.webp";
+import CustomEHSSoftwareImg from "../assets/trainingESGSoftwareQuality/CustomEHSSoftware.webp";
+import BexexISOPortalImg from "../assets/trainingESGSoftwareQuality/BexexISOPortal(Audit &ComplianceManager).webp";
+import DigitalLMSPlatformsImg from "../assets/trainingESGSoftwareQuality/DigitalLMSPlatforms.webp";
+import PerformanceDashboardsImg from "../assets/trainingESGSoftwareQuality/PerformanceDashboards.webp";
+import DigitalResourcesToolkitsImg from "../assets/trainingESGSoftwareQuality/DigitalResources&Toolkits.webp";
+
 
 
 // Compliance services images
@@ -501,6 +520,12 @@ const servicesCardData = [
         url: sixSigma,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: SixSigmaImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -579,6 +604,12 @@ const servicesCardData = [
         url: fiveSWorkplaceOrganization,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: FiveSWorkplaceOrganizationImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -655,6 +686,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: supplierQualityManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: SupplierQualityManagementImg,
         title: "Modern Architecture",
       },
 
@@ -736,6 +773,12 @@ const servicesCardData = [
         url: leanManagement,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: LeanManagementImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -812,6 +855,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: totalProductiveMaintenance,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: TotalProductiveMaintenanceImg,
         title: "Modern Architecture",
       },
 
@@ -892,6 +941,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: coreQualityTools,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: CoreQualityToolsImg,
         title: "Modern Architecture",
       },
 
@@ -2904,6 +2959,12 @@ const servicesCardData = [
         url: strategyReporting,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ESGStrategyReportingImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -2983,6 +3044,12 @@ const servicesCardData = [
         url: managementSystem,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: ESGManagementSystemImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3058,6 +3125,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: eneryManagement,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: EnergyManagementImg,
         title: "Modern Architecture",
       },
 
@@ -3138,6 +3211,12 @@ const servicesCardData = [
         url: environmentCompliance,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: EnvironmentalComplianceImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3215,6 +3294,12 @@ const servicesCardData = [
         url: waterWasteManagement,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: WaterWasteManagementImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3290,6 +3375,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: socialWelfare,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: SocialWelfareImg,
         title: "Modern Architecture",
       },
 
@@ -3684,6 +3775,12 @@ const servicesCardData = [
         url: allTrainingProgram,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: AllTrainingProgramsImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3766,6 +3863,12 @@ const servicesCardData = [
         url: customEhsSoftware,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: CustomEHSSoftwareImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3841,6 +3944,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: bexexIsoPortal,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: BexexISOPortalImg,
         title: "Modern Architecture",
       },
 
@@ -3920,6 +4029,12 @@ const servicesCardData = [
         url: digitalLmsPlatform,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: DigitalLMSPlatformsImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -3996,6 +4111,12 @@ const servicesCardData = [
         url: performanceDashboard,
         title: "Modern Architecture",
       },
+      {
+        id: 2,
+        type: "image",
+        url: PerformanceDashboardsImg,
+        title: "Modern Architecture",
+      },
 
       // {
       //   id: 2,
@@ -4069,6 +4190,12 @@ const servicesCardData = [
         id: 1,
         type: "image",
         url: digitalResource,
+        title: "Modern Architecture",
+      },
+      {
+        id: 2,
+        type: "image",
+        url: DigitalResourcesToolkitsImg,
         title: "Modern Architecture",
       },
 
